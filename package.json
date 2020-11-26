@@ -1,0 +1,14 @@
+{
+  "name": "api-response-codes",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "deploy": "sls deploy"
+  },
+  "dependencies": {
+    "serverless": "^2.12.0",
+    "serverless-offline": "^6.8.0"
+  }
+}

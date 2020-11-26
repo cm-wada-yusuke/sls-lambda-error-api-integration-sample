@@ -1,0 +1,27 @@
+service: api-response-codes
+provider:
+  name: aws
+  runtime: nodejs12.x
+plugins:
+  - serverless-offline
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          method: get
+          path: whatever
+          integration: lambda
+          response:
+            headers:
+              Content-Type: "'application/json'"
+            template: $input.path('$')
+            statusCodes:
+              200:
+                pattern: "" # Default response method
+                template: $input.path("$.body")
+              404:
+                pattern: '.*"statusCode":404,.*' # JSON response
+                template: $util.parseJson($input.json('$.errorMessage')) # JSON return object
+                headers:
+                  Content-Type: "'application/json'"
